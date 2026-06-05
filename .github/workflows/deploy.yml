@@ -110,9 +110,9 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             # 停止并删除旧容器
-            docker stop myblog 2>/dev/null || true
-            docker rm myblog 2>/dev/null || true
-            docker rmi myblog:latest 2>/dev/null || true
+            sudo docker stop myblog 2>/dev/null || true
+            sudo docker rm myblog 2>/dev/null || true
+            sudo docker rmi myblog:latest 2>/dev/null || true
             
             # 清理旧文件
             rm -rf /tmp/myblog
@@ -138,10 +138,10 @@ jobs:
             cd /tmp/myblog
             
             # 构建 Docker 镜像
-            docker build -t myblog:latest .
+            sudo docker build -t myblog:latest .
             
             # 运行容器，映射到 8000 端口
-            docker run -d \
+            sudo docker run -d \
               --name myblog \
               --restart always \
               -p 8000:80 \
