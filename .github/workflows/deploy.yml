@@ -81,7 +81,18 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: github-pages
-          path: ./public
+          path: ./artifact
+
+      - name: Extract artifact
+        run: |
+          mkdir -p public
+          cd artifact
+          if [ -f artifact.tar ]; then
+            tar -xf artifact.tar -C ../public/
+          else
+            cp -r * ../public/ 2>/dev/null || true
+          fi
+          cd ..
 
       - name: List files for debug
         run: |
