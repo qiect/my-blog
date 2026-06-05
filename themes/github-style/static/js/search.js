@@ -1,5 +1,5 @@
 (() => {
-  fetch('/index.json')
+  fetch('index.json')
   .then(response => response.json())
   .then(data => {
     const fuse = new Fuse(data, {
