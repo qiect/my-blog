@@ -81,6 +81,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: github-pages
+          path: ./public
+
+      - name: List files for debug
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Files in current directory:"
+          ls -la
+          echo "Files in public directory:"
+          ls -la public/ || echo "No public directory"
 
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -90,6 +100,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             rm -rf /var/www/myblog/*
+            mkdir -p /var/www/myblog
       
       - name: Sync files to server
         uses: appleboy/scp-action@v0.1.7
@@ -97,6 +108,6 @@ jobs:
           host: 39.107.53.196
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          source: "./*"
+          source: "public/*"
           target: "/var/www/myblog"
           strip_components: 1
