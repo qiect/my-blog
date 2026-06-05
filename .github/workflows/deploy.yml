@@ -78,7 +78,9 @@ jobs:
     needs: build
     steps:
       - name: Download artifact
-        uses: actions/download-pages-artifact@v3
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
 
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -95,6 +97,6 @@ jobs:
           host: 39.107.53.196
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          source: "public/*"
+          source: "./*"
           target: "/var/www/myblog"
           strip_components: 1
