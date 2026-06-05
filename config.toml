@@ -6,12 +6,12 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 
 [params]
-  author = "qiect"
-  description = "个人博客描述"
+  author = "Chet"
+  description = "AI驱动全栈开发工程师"
   github = "qiect"
-  email = "your.email@example.com"
+  email = "qctvip@vip.163.com"
   url = "https://qiect.github.io/my-blog/"
-  keywords = "blog, tech"
+  keywords = ".Net, AI"
   rss = true
   lastmod = true
   favicon = "images/github-mark.png"
