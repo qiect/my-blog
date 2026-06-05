@@ -41,6 +41,11 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
+      - name: Replace Gitalk secrets
+        run: |
+          sed -i 's/{{ GITALK_CLIENT_ID }}/${{ secrets.GITALK_CLIENT_ID }}/g' config.toml
+          sed -i 's/{{ GITALK_CLIENT_SECRET }}/${{ secrets.GITALK_CLIENT_SECRET }}/g' config.toml
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production

@@ -23,8 +23,8 @@ pygmentsUseClasses = true
   enableSearch = true
 
   [params.gitalk]
-    clientID = "Ov23litPecv7z9z3Vl67"
-    clientSecret = "a14bfe4011b4b6366db40612524015003c861f4b"
+    clientID = "{{ GITALK_CLIENT_ID }}"
+    clientSecret = "{{ GITALK_CLIENT_SECRET }}"
     repo = "my-blog"
     owner = "qiect"
     admin = "qiect"
