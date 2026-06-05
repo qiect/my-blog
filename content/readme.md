@@ -22,8 +22,10 @@ type: "readme"
 
 ### 🔗 链接
 
-- [GitHub](https://github.com/qiect)
-- [博客源码](https://github.com/qiect/my-blog)
+- [Gitee](https://gitee.com/qiect)
+- [CSDN](https://blog.csdn.net/qiect)
+- [博客园](https://www.cnblogs.com/qiect)
+- [ChetAPP](https://chetapp.top/)
 
 ---
 
