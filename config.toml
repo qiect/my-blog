@@ -1,0 +1,55 @@
+baseURL = "https://qiect.github.io/my-blog/"
+languageCode = "zh-cn"
+title = "我的博客"
+theme = "github-style"
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+
+[params]
+  author = "qiect"
+  description = "个人博客描述"
+  github = "qiect"
+  email = "your.email@example.com"
+  url = "https://qiect.github.io/my-blog/"
+  keywords = "blog, tech"
+  rss = true
+  lastmod = true
+  favicon = "/images/github-mark.png"
+  avatar = "/images/avatar.png"
+  headerIcon = "/images/github-mark-white.png"
+  location = "China"
+  userStatusEmoji = "👋"
+  enableGitalk = true
+  enableSearch = true
+
+  [params.gitalk]
+    clientID = "Ov23litPecv7z9z3Vl67"
+    clientSecret = "a14bfe4011b4b6366db40612524015003c861f4b"
+    repo = "my-blog"
+    owner = "qiect"
+    admin = "qiect"
+    id = "location.pathname"
+    labels = "gitalk"
+    perPage = 15
+    pagerDirection = "last"
+    createIssueManually = true
+    distractionFreeMode = false
+
+  [[params.links]]
+    title = "GitHub"
+    href = "https://github.com/qiect"
+
+[frontmatter]
+  lastmod = ["lastmod", ":fileModTime", ":default"]
+
+[outputs]
+  home = ["html", "json"]
+
+[outputFormats.json]
+  mediaType = "application/json"
+  baseName = "index"
+  isPlainText = false
+
+[services]
+  [services.googleAnalytics]
+    ID = ""
