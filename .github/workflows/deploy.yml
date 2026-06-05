@@ -75,27 +75,35 @@ jobs:
   deploy-to-server:
     name: Deploy to Aliyun Server (Docker)
     runs-on: ubuntu-latest
-    needs: build
+    env:
+      HUGO_VERSION: 0.125.0
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
         with:
-          name: github-pages
-          path: ./artifact
+          submodules: recursive
+          fetch-depth: 0
 
-      - name: Extract artifact
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Replace Gitalk secrets
         run: |
-          mkdir -p public
-          cd artifact
-          if [ -f artifact.tar ]; then
-            tar -xf artifact.tar -C ../public/
-          else
-            cp -r * ../public/ 2>/dev/null || true
-          fi
-          cd ..
+          sed -i 's/{{ GITALK_CLIENT_ID }}/${{ secrets.GITALK_CLIENT_ID }}/g' config.toml
+          sed -i 's/{{ GITALK_CLIENT_SECRET }}/${{ secrets.GITALK_CLIENT_SECRET }}/g' config.toml
+
+      - name: Build with Hugo for Aliyun
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "https://chetapp.top/"
 
       - name: Prepare Docker build context
         run: |
@@ -109,12 +117,9 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            # 停止并删除旧容器
             sudo docker stop myblog 2>/dev/null || true
             sudo docker rm myblog 2>/dev/null || true
             sudo docker rmi myblog:latest 2>/dev/null || true
-            
-            # 清理旧文件
             rm -rf /tmp/myblog
             mkdir -p /tmp/myblog
 
@@ -136,15 +141,10 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             cd /tmp/myblog
-            
-            # 构建 Docker 镜像
             sudo docker build -t myblog:latest .
-            
-            # 运行容器，映射到 8000 端口
             sudo docker run -d \
               --name myblog \
               --restart always \
               -p 8000:80 \
               myblog:latest
-            
             echo "Blog deployed successfully on port 8000!"
