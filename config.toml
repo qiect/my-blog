@@ -10,11 +10,11 @@ pygmentsUseClasses = true
   description = "AI驱动全栈开发工程师"
   github = "qiect"
   email = "qctvip@vip.163.com"
-  url = "https://qiect.github.io/my-blog/"
+  url = "https://chetapp.top/"
   keywords = ".Net, AI"
   rss = true
   lastmod = true
-  favicon = "images/github-mark.png"
+  favicon = "images/avatar.png"
   avatar = "images/avatar.png"
   headerIcon = "images/github-mark-white.png"
   location = "China"
@@ -43,7 +43,7 @@ pygmentsUseClasses = true
   lastmod = ["lastmod", ":fileModTime", ":default"]
 
 [outputs]
-  home = ["html", "json"]
+  home = ["html", "json", "RSS"]
 
 [outputFormats.json]
   mediaType = "application/json"
