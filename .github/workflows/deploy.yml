@@ -73,10 +73,13 @@ jobs:
         uses: actions/deploy-pages@v4
 
   deploy-to-server:
-    name: Deploy to Aliyun Server
+    name: Deploy to Aliyun Server (Docker)
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
@@ -94,14 +97,10 @@ jobs:
           fi
           cd ..
 
-      - name: List files for debug
+      - name: Prepare Docker build context
         run: |
-          echo "Current directory:"
-          pwd
-          echo "Files in current directory:"
-          ls -la
-          echo "Files in public directory:"
-          ls -la public/ || echo "No public directory"
+          cp Dockerfile public/
+          cp nginx.conf public/
 
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -110,15 +109,42 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            rm -rf /var/www/myblog/*
-            mkdir -p /var/www/myblog
-      
-      - name: Sync files to server
+            # 停止并删除旧容器
+            docker stop myblog 2>/dev/null || true
+            docker rm myblog 2>/dev/null || true
+            docker rmi myblog:latest 2>/dev/null || true
+            
+            # 清理旧文件
+            rm -rf /tmp/myblog
+            mkdir -p /tmp/myblog
+
+      - name: Copy files to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 39.107.53.196
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           source: "public/*"
-          target: "/var/www/myblog"
+          target: "/tmp/myblog"
           strip_components: 1
+
+      - name: Build and run Docker container
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 39.107.53.196
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            cd /tmp/myblog
+            
+            # 构建 Docker 镜像
+            docker build -t myblog:latest .
+            
+            # 运行容器，映射到 8000 端口
+            docker run -d \
+              --name myblog \
+              --restart always \
+              -p 8000:80 \
+              myblog:latest
+            
+            echo "Blog deployed successfully on port 8000!"
