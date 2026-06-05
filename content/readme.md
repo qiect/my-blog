@@ -22,7 +22,7 @@ type: "readme"
 
 ### 🔗 链接
 
-[Gitee](https://gitee.com/qiect) · [CSDN](https://blog.csdn.net/qiect) · [博客园](https://www.cnblogs.com/qiect) · [ChetAPP](https://chetapp.top/)
+[Gitee](https://gitee.com/qiect) · [CSDN](https://blog.csdn.net/weixin_39630549) · [博客园](https://www.cnblogs.com/qiect) · [ChetAPP](https://chetapp.top/)
 
 ---
 
