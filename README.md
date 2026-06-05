@@ -1,297 +1,152 @@
-# github-style
+# My Blog
 
-## Init hugo site
+基于 Hugo 和 github-style 主题搭建的个人技术博客。
 
-```bash
-hugo new site mysite
-cd mysite
-```
+## 🚀 快速开始
 
-## Install the theme
+### 本地预览
 
 ```bash
-git submodule add git@github.com:MeiK2333/github-style.git themes/github-style
+# 安装 Hugo (扩展版)
+brew install hugo  # macOS
+# 或
+choco install hugo-extended  # Windows
+
+# 克隆仓库
+git clone https://github.com/qiect/my-blog.git
+cd my-blog
+
+# 启动本地服务器
+hugo server -D
+
+# 访问 http://localhost:1313/my-blog/
 ```
 
-## Update the theme
-
-If you just installed the theme, it is already in the latest version. If not, you can update using the below commands
+### 创建新文章
 
 ```bash
-cd themes/github-style
-git pull
+hugo new post/文章标题.md
 ```
 
-Then, you need to rename the previous `posts` folder to `post`
+编辑生成的文件，将 `draft: true` 改为 `draft: false` 即可发布。
 
-```bash
-cd <you-project-folder>
-mv content/posts content/post
-```
-
-## Setup readme
-
-```bash
-hugo new readme.md
-echo '`Hello World!`' > content/readme.md
-```
-
-## Pin post
+## 📁 项目结构
 
 ```
+my-blog/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml       # GitHub Actions 自动部署
+├── content/
+│   ├── post/                # 博客文章
+│   └── readme.md            # 首页 README
+├── themes/
+│   └── github-style/        # 主题文件
+├── config.toml              # Hugo 配置文件
+└── README.md                # 本文件
+```
+
+## ✨ 功能特性
+
+- 🎨 **GitHub 风格设计** - 简洁优雅的界面
+- 💬 **Gitalk 评论系统** - 基于 GitHub Issue 的评论
+- 🔍 **本地搜索** - 基于 fuse.js 的全文搜索
+- 🌙 **暗色模式** - 支持明暗主题切换
+- 📱 **响应式设计** - 完美支持移动端
+- 📊 **LaTeX 支持** - 支持 KaTeX 和 MathJax 数学公式
+- 🏷️ **标签分类** - 文章标签和分类支持
+- 📡 **RSS 订阅** - 支持 RSS 订阅
+- 🚀 **自动部署** - GitHub Actions 自动构建部署
+
+## 📝 文章管理
+
+### 文章格式
+
+```yaml
 ---
-pin: true
----
-```
-
-## Add new post
-
-Hugo will create a post with `draft: true`, change it to false in order for it to show in the website.
-
-```
-hugo new post/title_of_the_post.md
-```
-
-## Limit display content
-
-### Approach 1: use summary
-
-```
----
-title: "title"
-date: 2019-10-22T18:46:47+08:00
+title: "文章标题"
+date: 2026-06-05T10:00:00+08:00
 draft: false
-summary: "The summary content"
+summary: "文章摘要"
+tags: ["标签1", "标签2"]
+pin: true  # 可选：置顶文章
+katex: math  # 可选：启用 LaTeX
 ---
+
+文章内容...
 ```
 
-### Approach 2: use `<!--more-->`
+### 摘要控制
 
-Use `<!--more-->` to separate content that will display in the posts page as abstraction and the rest of the content. This is different from summary, as summary will not appear in the post.
-```
----
-title: "title"
-date: 2019-10-22T18:46:47+08:00
-draft: false
----
-abstraction show in the post page
+**方式一**：使用 `summary` 字段
+
+**方式二**：使用 `<!--more-->` 分隔符
+
+```markdown
+这部分显示在列表页
+
 <!--more-->
-other content
+
+这部分只在详情页显示
 ```
 
-## Add last modified date
+## 🔧 配置说明
 
-add to `config.toml`
+主要配置在 `config.toml` 文件中：
+
+### 基本信息
 
 ```toml
-lastmod = true
+baseURL = "https://qiect.github.io/my-blog/"
+title = "我的博客"
 
-[frontmatter]
-  lastmod = ["lastmod", ":fileModTime", ":default"]
+[params]
+  author = "qiect"
+  description = "个人博客描述"
+  github = "qiect"
 ```
 
-## Use [gitalk](https://github.com/gitalk/gitalk) to support comments
-
-add to `config.toml`
-
-```toml
-enableGitalk = true
-
-  [params.gitalk]
-    clientID = "Your client ID"
-    clientSecret = "Your client secret"
-    repo = "repo"
-    owner = "Your Github username"
-    admin = "Your Github username"
-    id = "location.pathname"
-    labels = "gitalk"
-    perPage = 30
-    pagerDirection = "last"
-    createIssueManually = true
-    distractionFreeMode = false
-```
-
-## Support LaTeX
-
-In you post add `math: true` to [front matter](https://gohugo.io/content-management/front-matter/)
-
-```
----
-katex: math
----
-```
-
-Then the [katex script](https://katex.org/docs/autorender.html) will auto render the string enclosed by delimiters.
-
-```
-# replace ... with latex formula
-display inline \\( ... \\)
-display block $$ ... $$
-```
-
-![latex example](https://raw.githubusercontent.com/MeiK2333/github-style/master/images/latex_example.png)
-
-## Support MathJax
-you can add MathJax:true to frontmatter
-
-```
-mathJax: true
-```
-
-## Custom CSS and JS
-
-Add your files in the static folder and list them in the custom_css and custom_js parameters
-
-For example, with static/css/custom.css and static/js/custom.js, add to `config.toml`
+### Gitalk 评论
 
 ```toml
 [params]
-  custom_css = ["css/custom.css"]
-  custom_js = ["js/custom.js"]
-  # custom script with defer attribute
-  defer_custom_js = ["js/defer_custom.js"]
-```
-
-## config.toml example
-
-```toml
-baseURL = "https://meik2333.com/"
-languageCode = "zh-cn"
-title = "MeiK's blog"
-theme = "github-style"
-pygmentsCodeFences = true
-pygmentsUseClasses = true
-
-[params]
-  author = "MeiK"
-  description = "In solitude, where we are least alone."
-  github = "MeiK2333"
-  facebook = "MeiK2333"
-  twitter = "MeiK2333"
-  linkedin = "MeiK2333"
-  instagram = "MeiK2333"
-  tumblr = "MeiK2333"
-  email = "meik2333@gmail.com"
-  url = "https://meik2333.com"
-  keywords = "blog, google analytics"
-  rss = true
-  lastmod = true
-  userStatusEmoji = "😀"
-  favicon = "/images/github.png"
-  avatar = "/images/avatar.png"
-  headerIcon = "/images/GitHub-Mark-Light-32px.png"
-  location = "China"
   enableGitalk = true
-  custom_css = ["css/custom.css"]
-  custom_js = ["js/custom.js"]
 
   [params.gitalk]
-    clientID = "Your client ID"
-    clientSecret = "Your client secret"
-    repo = "repo"
-    owner = "MeiK2333"
-    admin = "MeiK2333"
-    id = "location.pathname"
-    labels = "gitalk"
-    perPage = 15
-    pagerDirection = "last"
-    createIssueManually = true
-    distractionFreeMode = false
-
-  [[params.links]]
-    title = "Link"
-    href = "https://github.com/meik2333"
-  [[params.links]]
-    title = "Link2"
-    href = "https://meik2333.com"
-    icon = "https://meik2333.com/images/avatar.png"
-
-[frontmatter]
-  lastmod = ["lastmod", ":fileModTime", ":default"]
-
-[services]
-  [services.googleAnalytics]
-    ID = "UA-123456-789"
-
+    clientID = "your-client-id"
+    clientSecret = "your-client-secret"
+    repo = "my-blog"
+    owner = "qiect"
 ```
 
-## Support collapsible block
+## 🚢 部署
 
-You can create a collapsible block like this:
+博客使用 GitHub Actions 自动部署到 GitHub Pages。
 
-```
-{{<details "summary title">}}
+### 部署流程
 
-block content
+1. 推送代码到 `main` 分支
+2. GitHub Actions 自动触发构建
+3. Hugo 构建静态文件
+4. 自动部署到 GitHub Pages
 
-{{</details>}}
-```
-
-And it will show like this:
-
-<details>
-  <summary>summary title</summary>
-  <p>block content</p>
-</details>
-
-## Support local search
-
-add to `config.toml`
-
-```toml
-[params]
-  enableSearch = true
-
-[outputs]
-  home = ["html", "json"]
-
-[outputFormats.json]
-  mediaType = "application/json"
-  baseName = "index"
-  isPlainText = false
-```
-
-We can do local search now, it is implemented by `fuse.js`.
-
-## deploy.sh example
-
-There are various way to deploy to github, here is a link to official [document](https://gohugo.io/hosting-and-deployment/hosting-on-github/).
-
-Here is an sample. Note line 22 have `env HUGO_ENV="production"`, makes sure googleAnalysis is loaded during production, but is not loaded when we are testing it in localhost.
+### 手动部署
 
 ```bash
-#!/bin/sh
-
-if [ "`git status -s`" ]
-then
-    echo "The working directory is dirty. Please commit any pending changes."
-    exit 1;
-fi
-
-echo "Deleting old publication"
-rm -rf public
-mkdir public
-git worktree prune
-rm -rf .git/worktrees/public/
-
-echo "Checking out gh-pages branch into public"
-git worktree add -B gh-pages public origin/gh-pages
-
-echo "Removing existing files"
-rm -rf public/*
-
-echo "Generating site"
-env HUGO_ENV="production" hugo -t github-style
-
-echo "Updating gh-pages branch"
-cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)"
-
-#echo "Pushing to github"
-#git push --all
+hugo --gc --minify
 ```
 
-Then you can verify the site is working and use `git push --all` to push the change to github. If you don't want to check again every time, you can uncomment the `#git push --all` in the script.
+生成的文件在 `public/` 目录。
 
-## TODO
+## 📖 相关链接
 
-- 重写标题导航，那玩意儿引入的 JS 在控制台报错。
+- [博客地址](https://qiect.github.io/my-blog/)
+- [GitHub 仓库](https://github.com/qiect/my-blog)
+- [Hugo 官方文档](https://gohugo.io/documentation/)
+- [github-style 主题](https://github.com/MeiK2333/github-style)
+
+## 📄 许可证
+
+本项目基于 MIT 许可证开源。
+
+主题基于 [github-style](https://github.com/MeiK2333/github-style) (MIT License)。

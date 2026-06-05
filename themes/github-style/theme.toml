@@ -4,13 +4,18 @@
 name = "Github Style"
 license = "MIT"
 licenselink = "https://github.com/MeiK2333/github-style/blob/master/LICENSE"
-description = "github-style hugo theme"
-homepage = "https://github.com/MeiK2333"
-demosite = "https://meik2333.com/"
-tags = ["blog", "google analytics"]
-features = ["google analytics"]
-min_version = "0.41"
+description = "github-style hugo theme - A GitHub-style blog theme for Hugo"
+homepage = "https://github.com/qiect/my-blog"
+demosite = "https://qiect.github.io/my-blog/"
+tags = ["blog", "github", "gitalk", "google-analytics", "responsive", "dark-mode"]
+features = ["gitalk", "google-analytics", "rss", "search", "dark-mode", "latex"]
+min_version = "0.125.0"
 
 [author]
+  name = "qiect"
+  homepage = "https://github.com/qiect"
+
+[original]
   name = "MeiK"
   homepage = "https://github.com/MeiK2333"
+  repo = "https://github.com/MeiK2333/github-style"
