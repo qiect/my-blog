@@ -46,6 +46,10 @@ jobs:
           sed -i 's/{{ GITALK_CLIENT_ID }}/${{ secrets.GITALK_CLIENT_ID }}/g' config.toml
           sed -i 's/{{ GITALK_CLIENT_SECRET }}/${{ secrets.GITALK_CLIENT_SECRET }}/g' config.toml
 
+      - name: Fix image paths for subdirectory deployment
+        run: |
+          find content/post -name '*.md' -exec sed -i 's|(/images/|(/my-blog/images/|g' {} +
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
