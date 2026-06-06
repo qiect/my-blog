@@ -1,14 +1,14 @@
-# SharpCompress解压带密码的RAR压缩文件问题
-
-**原文链接**: https://www.cnblogs.com/qiect/articles/16363110.html
-
-**发布时间**: 2026-06-10 14:24
-
+---
+title: "SharpCompress解压带密码的RAR压缩文件问题"
+date: 2025-10-25T14:24:00+08:00
+draft: false
+summary: "使用 SharpCompress 解压带密码的压缩文件时遇到的问题及解决方案，RAR 解压失败后改用 ZIP 格式并逐文件写入的完整过程"
+tags: [".NetCore", "SharpCompress", "压缩解压", "ZIP"]
 ---
 
-## 项目场景：
-
 因为保密性的原因，我需要针对压缩文件加密，也就是在压缩的同时加上密码；然后代码解压带密码的压缩文件，再去处理解压后的文件。
+
+<!--more-->
 
 ## 问题描述
 
@@ -99,4 +99,3 @@ using (var archive = ArchiveFactory.Open(tempPath, new ReaderOptions { Password 
 最奇葩的是用这种方式解压带密码的rar文件，都是空文件，zip就没问题，知道的兄弟可以留言下。
 
 ![SharpCompress](/images/SharpCompress解压带密码的RAR压缩文件问题/16363110_1.png)
-
