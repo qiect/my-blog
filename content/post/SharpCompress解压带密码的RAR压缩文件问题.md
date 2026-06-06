@@ -1,6 +1,6 @@
 ---
 title: "SharpCompress解压带密码的RAR压缩文件问题"
-date: 2026-06-10T14:24:00+08:00
+date: 2025-10-25T14:24:00+08:00
 draft: false
 summary: "使用 SharpCompress 解压带密码的压缩文件时遇到的问题及解决方案，RAR 解压失败后改用 ZIP 格式并逐文件写入的完整过程"
 tags: [".NetCore", "SharpCompress", "压缩解压", "ZIP"]

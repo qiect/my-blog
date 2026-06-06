@@ -16,6 +16,9 @@ type: "readme"
 - [开源项目](https://github.com/qiect) - 我做的开源项目分享
 - [Chet.QuartzNet.UI](https://qiect.github.io/Chet.QuartzNet.UI) - 可视化作业调度管理系统
 - [Chet.Web.Template](https://qiect.github.io/Chet.WebAPI.Template.Generator) - .NET 10 Web API 框架
+- [GisTools](https://qiect.github.io/GisTools/) - GIS 工具集
+- [LinuxRef](https://qiect.github.io/LinuxRef/) - Linux 参考手册
+- [TypeScriptRef](https://qiect.github.io/TypeScriptRef/) - TypeScript 参考手册
 - 国学经典听读 - 微信小程序
 
 ---
