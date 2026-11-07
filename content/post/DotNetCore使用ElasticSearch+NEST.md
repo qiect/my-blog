@@ -1,7 +1,7 @@
 ---
 title: "DotNetCore使用ElasticSearch+NEST"
 date: 2026-04-05T22:52:00+08:00
-draft: false
+draft: true
 summary: "在 .Net Core 项目中使用 NEST 客户端操作 ElasticSearch，包括 ES 安装、NEST 依赖注入及 ElasticSearch-Head 工具的安装配置"
 tags: [".NetCore", "ElasticSearch", "NEST", "搜索"]
 ---

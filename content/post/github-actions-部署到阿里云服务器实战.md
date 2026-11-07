@@ -1,7 +1,7 @@
 ---
 title: "GitHub Actions 自动部署博客到阿里云服务器实战"
 date: 2026-06-05T15:00:00+08:00
-draft: false
+draft: true
 summary: "记录从 GitHub Actions 自动构建 Hugo 博客，通过 SSH 部署到阿里云服务器 Docker 容器的完整过程，以及踩过的坑和解决方案"
 tags: ["GitHub Actions", "Docker", "阿里云", "CI/CD", "部署"]
 ---

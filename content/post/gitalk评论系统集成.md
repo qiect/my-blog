@@ -1,7 +1,7 @@
 ---
 title: "Gitalk 评论系统集成"
 date: 2026-06-05T12:00:00+08:00
-draft: false
+draft: true
 summary: "如何在 Hugo 博客中集成 Gitalk 评论系统"
 tags: ["Gitalk", "评论", "GitHub"]
 ---

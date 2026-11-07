@@ -1,7 +1,7 @@
 ---
 title: "DotNetCore实现QQ登录"
 date: 2026-04-05T22:38:00+08:00
-draft: false
+draft: true
 summary: "在 .Net Core 中使用 Microsoft.AspNetCore.Authentication.QQ 组件实现 QQ 第三方登录，记录从 QQ 互联申请到代码实现的完整过程及踩坑经验"
 tags: [".NetCore", "QQ登录", "OAuth2.0", "认证"]
 ---
