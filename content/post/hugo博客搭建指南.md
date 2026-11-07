@@ -1,7 +1,7 @@
 ---
 title: "Hugo 博客搭建指南"
 date: 2026-06-05T11:00:00+08:00
-draft: false
+draft: true
 summary: "详细介绍如何使用 Hugo 和 github-style 主题搭建个人博客"
 tags: ["Hugo", "教程", "博客"]
 ---

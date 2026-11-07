@@ -1,7 +1,7 @@
 ---
 title: "GitHub Pages 自动部署"
 date: 2026-06-05T13:00:00+08:00
-draft: false
+draft: true
 summary: "使用 GitHub Actions 自动部署 Hugo 博客到 GitHub Pages"
 tags: ["GitHub Actions", "CI/CD", "部署"]
 ---
